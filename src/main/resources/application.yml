@@ -12,3 +12,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+# My config variables
+config:
+  admin:
+    ipAddress: ${MY_PUBLIC_IP_ADDRESS}
