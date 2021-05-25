@@ -17,3 +17,7 @@ spring:
 config:
   admin:
     ipAddress: ${MY_PUBLIC_IP_ADDRESS}
+  jwt:
+    token:
+      secret: ${TOKEN_SECRET}
+      expired: ${TOKEN_EXPIRATION_TIME}
