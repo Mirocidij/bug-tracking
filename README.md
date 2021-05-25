@@ -1,0 +1,1 @@
+[![Hits-of-Code](https://github.com/Mirocidij/bug-tracking)](https://github.com/Mirocidij/bug-tracking)
