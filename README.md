@@ -1,4 +1,4 @@
-[![Hits-of-Code](https://github.com/Mirocidij/bug-tracking)](https://github.com/Mirocidij/bug-tracking)
+[![Hits-of-Code](https://hitsofcode.com/github/Mirocidij/bug-tracking)](https://hitsofcode.com/view/github/Mirocidij/bug-trackingc)
 
 **Hello everyone, this is my open source bug tracking system**
 
