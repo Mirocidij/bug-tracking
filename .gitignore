@@ -37,6 +37,7 @@ out/
 .vscode/
 
 ### webapp ###
-node_modules
-yarn.lock
-src/main/resources/static/dist
+src/main/resources/static/*
+src/main/resources/clientApp/node_modules
+src/main/resources/clientApp/package-lock.json
+src/main/resources/clientApp/yarn.lock
