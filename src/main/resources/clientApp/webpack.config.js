@@ -45,16 +45,36 @@ const cssLoaders = ext => {
 
 const fileLoader = () => ['file-loader']
 
+const babelOptions = preset => {
+    const options = {
+        presets: [
+            '@babel/preset-env'
+        ],
+        plugins: [
+            '@babel/plugin-proposal-class-properties'
+        ]
+    }
+
+    if (preset) {
+        options.presets.push(preset)
+    }
+
+    return options
+}
+
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
-    devtool: 'source-map',
+    devtool: isDev ? 'source-map' : 'nosources-source-map',
     entry: {
-        main: path.resolve(__dirname, 'src', 'index.js')
+        main: ['@babel/polyfill', './index.jsx']
     },
     output: {
         filename: filename('js'),
         path: path.resolve(__dirname, '..', 'static')
+    },
+    resolve: {
+        extensions: ['.js', '.ts', '.png', '.css', '.less', '.jsx', '.tsx']
     },
     optimization: optimization(),
     devServer: {},
@@ -101,11 +121,25 @@ module.exports = {
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            '@babel/preset-env'
-                        ]
-                    }
+                    options: babelOptions()
+                }
+            },
+            {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: babelOptions(['@babel/preset-typescript'])
+                }
+            },
+            {
+                test: /\.jsx$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: babelOptions([
+                        '@babel/preset-react'
+                    ])
                 }
             }
         ]
