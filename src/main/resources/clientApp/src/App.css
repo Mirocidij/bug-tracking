@@ -1,0 +1,23 @@
+.main-container {
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+    background-color: #c5f6f6;
+}
+
+.content-body {
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.mt2 {
+    margin-top: 2rem;
+}
+
+.b2p {
+    border: 2px solid black;
+}

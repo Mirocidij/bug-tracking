@@ -1,30 +1,21 @@
-import './styles/styles'
-import axios from "axios";
-import Post from "./models/Post";
-import './styles/less'
-import './babel'
-import './lol'
 import React from "react";
-import {render} from 'react-dom'
+import ReactDOM from "react-dom";
+import {Provider} from "react-redux";
+import App from "./App.jsx"
+import { BrowserRouter as Router } from "react-router-dom";
+import store from "./Common/System/configStore";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import '@atlaskit/css-reset'
 
-axios
-    .get("http://localhost:9000/greeting")
-    .then(res => console.log(res.data))
-    .catch()
 
-let post = new Post("Title", "Some message in post")
-
-console.log(post.toString())
-
-const App = () => (
-    <div>
-        <div className="logo"></div>
-        <h1>Hello, Man</h1>
-        <hr/>
-        <div className="box">
-            <h2>Less</h2>
-        </div>
-    </div>
-)
-
-render(<App/>, document.getElementById('root'))
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <Router>
+                <App/>
+            </Router>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+);
