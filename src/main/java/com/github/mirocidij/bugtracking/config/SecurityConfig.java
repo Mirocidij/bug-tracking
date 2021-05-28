@@ -9,17 +9,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
+    private final JwtTokenProvider jwtTokenProvider;
+
     @Value(value = "${config.admin.ipAddress}")
     private String adminIpAddress;
-
-    private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
     @Override
@@ -38,13 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .antMatchers("/admin").hasIpAddress(adminIpAddress)
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("*");
     }
 
 }
