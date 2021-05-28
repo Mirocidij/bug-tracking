@@ -38,6 +38,6 @@ out/
 
 ### webapp ###
 src/main/resources/static/*
-src/main/resources/clientApp/node_modules
-src/main/resources/clientApp/package-lock.json
-src/main/resources/clientApp/yarn.lock
+src/web-app/node_modules
+src/web-app/package-lock.json
+src/web-app/yarn.lock

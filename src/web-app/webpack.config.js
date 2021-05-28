@@ -26,7 +26,7 @@ const optimization = () => {
     return config
 }
 
-const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
+const filename = ext => isDev ? `[name].${ext}` : `[name].[fullhash].${ext}`
 
 const cssLoaders = ext => {
     const loaders = [
@@ -71,7 +71,7 @@ module.exports = {
     },
     output: {
         filename: filename('js'),
-        path: path.resolve(__dirname, '..', 'static')
+        path: path.resolve(__dirname, '..', 'main', 'resources', 'static')
     },
     resolve: {
         extensions: ['.js', '.ts', '.png', '.css', '.less', '.jsx', '.tsx']
@@ -90,7 +90,7 @@ module.exports = {
             patterns: [
                 {
                     from: path.resolve(__dirname, 'src/favicon.ico'),
-                    to: path.resolve(__dirname, '..', 'static')
+                    to: path.resolve(__dirname, '..', 'main', 'resources', 'static')
                 }
             ]
         }),
