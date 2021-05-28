@@ -5,9 +5,12 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import CardAdder from "./cardAdder";
 
 const Container = styled.div`
+  box-sizing: border-box;  
+`;
+const ColumnContent = styled.div`
   background-color: #EBECF0;
   border-radius: 3px;
-  box-sizing: border-box;
+  
   width: auto;
   margin-left: 8px;
 
@@ -38,33 +41,35 @@ export default class Column extends React.Component {
               ref={provided.innerRef}
               {...provided.draggableProps}
             >
-              <Title {...provided.dragHandleProps}>
-                {this.props.column.title}
-              </Title>
-              <Droppable
-                droppableId={this.props.column.id}
-                type="task"
-              >
-                {(provided, snapshot) => (
-                  <TaskList
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    isDraggingOver={snapshot.isDraggingOver}
-                  >
-                    {this.props.tasks.map((task, index) =>
-                      <Task
-                        key={task.id}
-                        task={task}
-                        index={index}/>)}
-                    {provided.placeholder}
-                    <CardAdder
-                      addNewCard={() => {
-                        console.log(this.props.column)
-                      }}
-                    />
-                  </TaskList>
-                )}
-              </Droppable>
+              <ColumnContent>
+                <Title {...provided.dragHandleProps}>
+                  {this.props.column.title}
+                </Title>
+                <Droppable
+                    droppableId={this.props.column.id}
+                    type="task"
+                >
+                  {(provided, snapshot) => (
+                      <TaskList
+                          ref={provided.innerRef}
+                          {...provided.droppableProps}
+                          isDraggingOver={snapshot.isDraggingOver}
+                      >
+                        {this.props.tasks.map((task, index) =>
+                            <Task
+                                key={task.id}
+                                task={task}
+                                index={index}/>)}
+                        {provided.placeholder}
+                        <CardAdder
+                            addNewCard={() => {
+                              console.log(this.props.column)
+                            }}
+                        />
+                      </TaskList>
+                  )}
+                </Droppable>
+              </ColumnContent>
             </Container>
           )
         }
