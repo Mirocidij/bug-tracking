@@ -1,1 +1,0 @@
-export { sendLoginRequest } from './reducer'
