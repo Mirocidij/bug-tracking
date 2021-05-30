@@ -1,4 +1,4 @@
-import {Container, Nav, Navbar, NavItem} from "react-bootstrap";
+import {Container, Nav, NavLink as NavLinkBootStrap, Navbar, NavItem} from "react-bootstrap";
 import logo from '../images/logo192.png'
 import {NavLink} from 'react-router-dom'
 import React from "react";
@@ -31,6 +31,9 @@ const Header = () => {
                             </NavItem>
                             <NavItem>
                                 <Nav.Link as={NavLink} to="/profile">My profile</Nav.Link>
+                            </NavItem>
+                            <NavItem>
+                                <Nav.Link href="/logout">Logout!</Nav.Link>
                             </NavItem>
                         </Nav>
                     </Navbar.Collapse>

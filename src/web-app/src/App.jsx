@@ -7,6 +7,7 @@ import Companies from "./Pages/Companies/Companies";
 import Boards from "./Pages/Boards/Boards";
 import Profile from "./Pages/Profile/Profile";
 import AppDnd from "./AppDnd";
+import LoginForm from "./Features/Login/LoginForm";
 
 const NoMatch = () => {
     return (
@@ -21,16 +22,15 @@ const App = () => {
         <div className="main-container">
             <Header/>
 
-            <div className="content-body">
-                <Switch>
-                    <Route exact path="/" component={AppDnd}/>
-                    <Route exact path="/users" component={Users}/>
-                    <Route exact path="/companies" component={Companies}/>
-                    <Route exact path="/boards" component={Boards}/>
-                    <Route exact path="/profile" component={Profile}/>
-                    <Route exact component={NoMatch}/>
-                </Switch>
-            </div>
+            <Switch>
+                <Route exact path="/" component={AppDnd}/>
+                <Route exact path="/users" component={Users}/>
+                <Route exact path="/companies" component={Companies}/>
+                <Route exact path="/boards" component={Boards}/>
+                <Route exact path="/profile" component={Profile}/>
+                <Route exact path="/login" component={LoginForm} />
+                <Route exact component={NoMatch}/>
+            </Switch>
         </div>
     );
 }

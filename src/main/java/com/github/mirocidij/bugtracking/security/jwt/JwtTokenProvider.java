@@ -1,6 +1,6 @@
 package com.github.mirocidij.bugtracking.security.jwt;
 
-import com.github.mirocidij.bugtracking.model.role.Role;
+import com.github.mirocidij.bugtracking.domain.model.role.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -51,11 +51,11 @@ public class JwtTokenProvider {
         Date validity = new Date(now.getTime() + validityInMills);
 
         return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(validity)
-                .signWith(SignatureAlgorithm.HS256, secret)
-                .compact();
+                   .setClaims(claims)
+                   .setIssuedAt(now)
+                   .setExpiration(validity)
+                   .signWith(SignatureAlgorithm.HS256, secret)
+                   .compact();
     }
 
     public Authentication getAuthentication(String token) {
@@ -71,7 +71,6 @@ public class JwtTokenProvider {
     public String resolveToken(HttpServletRequest request) {
         var bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
-
             return bearerToken.substring(7);
         }
 

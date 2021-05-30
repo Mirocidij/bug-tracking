@@ -1,6 +1,6 @@
-package com.github.mirocidij.bugtracking.model.role;
+package com.github.mirocidij.bugtracking.domain.model.role;
 
-import com.github.mirocidij.bugtracking.model.BaseEntity;
+import com.github.mirocidij.bugtracking.domain.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

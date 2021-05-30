@@ -1,4 +1,4 @@
-package com.github.mirocidij.bugtracking.model;
+package com.github.mirocidij.bugtracking.domain.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

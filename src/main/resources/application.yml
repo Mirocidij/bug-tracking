@@ -1,6 +1,8 @@
 server:
   port: ${BUG_TRACKER_SERVER_PORT}
-
+  servlet:
+    session:
+      timeout: 2
 spring:
   datasource:
     url: ${DB_URL}
@@ -15,9 +17,9 @@ spring:
 
 # My config variables
 config:
-  admin:
-    ipAddress: ${MY_PUBLIC_IP_ADDRESS}
   jwt:
     token:
       secret: ${TOKEN_SECRET}
       expired: ${TOKEN_EXPIRATION_TIME}
+
+

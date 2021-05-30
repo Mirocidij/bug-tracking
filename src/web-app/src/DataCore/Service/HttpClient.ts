@@ -2,7 +2,7 @@ import axios from 'axios';
 
 function createSession() {
   return axios.create({
-    baseURL: "http://localhost:8085/api/",
+    baseURL: "http://localhost:9000/api/v1/",
   });
 }
 
@@ -16,8 +16,8 @@ class _HttpClient {
   get = (...params: any) =>
     this.session
         .get(...params)
-        .catch((param: any) => {
-          throw param;
+        .catch((exception: any) => {
+          throw exception;
         });
 
   post = (...params: any) => this.session.post(...params);

@@ -119,11 +119,7 @@ class AppDnd extends React.Component {
       lastColumnId: this.state.lastColumnId + 1
     }
 
-
-    console.log(this.state)
     this.setState(newState)
-    console.log(this.state)
-    console.log(newState)
   }
 
   render() {

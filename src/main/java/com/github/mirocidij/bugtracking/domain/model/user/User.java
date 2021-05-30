@@ -1,7 +1,8 @@
-package com.github.mirocidij.bugtracking.model.user;
+package com.github.mirocidij.bugtracking.domain.model.user;
 
-import com.github.mirocidij.bugtracking.model.BaseEntity;
-import com.github.mirocidij.bugtracking.model.role.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.mirocidij.bugtracking.domain.model.BaseEntity;
+import com.github.mirocidij.bugtracking.domain.model.role.Role;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "users")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
+@JsonIgnoreProperties
 public class User extends BaseEntity<Long> {
 
     @Column(name = "username")

@@ -5,6 +5,12 @@ class _Api {
     const response = await HttpClient.get('users/all', params);
     return response.data;
   }
+
+  public async getAllBoards(params: any) {
+    const response = await HttpClient.get('boards/all', params);
+
+    return response.data;
+  }
 }
 
 export const API = new _Api();
