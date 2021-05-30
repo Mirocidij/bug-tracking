@@ -1,5 +1,5 @@
 import {Container, Nav, NavLink as NavLinkBootStrap, Navbar, NavItem} from "react-bootstrap";
-import logo from '../images/logo192.png'
+import logo from '../../../../Common/Components/images/logo192.png'
 import {NavLink} from 'react-router-dom'
 import React from "react";
 
