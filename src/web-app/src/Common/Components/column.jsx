@@ -5,12 +5,12 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import CardAdder from "./cardAdder";
 
 const Container = styled.div`
-  box-sizing: border-box;  
+  box-sizing: border-box;
 `;
 const ColumnContent = styled.div`
   background-color: #EBECF0;
   border-radius: 3px;
-  
+
   width: auto;
   margin-left: 8px;
 
