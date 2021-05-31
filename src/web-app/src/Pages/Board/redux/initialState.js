@@ -1,5 +1,5 @@
-const initialData = {
-  lastTaskId: 13,
+const initialState = {
+  boardDataIsLoading: false,
   tasks: {
     'task-1': { id: 'task-1', content: 'Take out the garbage' },
     'task-2': { id: 'task-2', content: 'Watch my favorite show' },
@@ -15,7 +15,6 @@ const initialData = {
     'task-12': { id: 'task-12', content: 'Something string how very very long in its length' },
     'task-13': { id: 'task-13', content: 'Something string how very very long in its length' },
   },
-  lastColumnId: 8,
   columns: {
     'column-1': {
       id: 'column-1',
@@ -70,6 +69,6 @@ const initialData = {
     'column-7',
     'column-8',
   ]
-};
+}
 
-export default initialData;
+export default initialState;

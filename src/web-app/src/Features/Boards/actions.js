@@ -1,1 +1,0 @@
-export  { getAllBoards } from './reducer'

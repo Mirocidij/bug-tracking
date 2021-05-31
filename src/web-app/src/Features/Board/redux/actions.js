@@ -1,1 +1,0 @@
-export {loadBoardData} from './reducer'

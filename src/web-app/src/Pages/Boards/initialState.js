@@ -1,6 +1,5 @@
 const initialState = {
-    boardDataIsLoading: false,
-    boardData: {}
+  boards: []
 }
 
 export default initialState;
