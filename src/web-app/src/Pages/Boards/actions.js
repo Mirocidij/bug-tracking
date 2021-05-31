@@ -1,1 +1,1 @@
-export  { getAllBoards } from './reducer'
+export { getAllBoards } from './reducer'

@@ -1,5 +1,5 @@
 const initialState = {
-    boards: []
+  boards: []
 }
 
 export default initialState;
