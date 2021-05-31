@@ -5,7 +5,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <>
+    <div>
       <Navbar collapseOnSelect={true} sticky="top" expand="lg">
         <Container>
           <Navbar.Brand className="header-brand" as={NavLink} to="/">
@@ -39,7 +39,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </>
+    </div>
   )
 }
 

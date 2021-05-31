@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from './redux/actions';
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
-import Column from "../../Common/Components/column";
+import Column from "./Components/column";
 
 const BoardWrapper = styled.div`
   height: 100%;

@@ -8,9 +8,6 @@ const Container = styled.div`
   padding: 8px;
   margin-bottom: 8px;
   background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')};
-  //width: 200px;
-
-  display: flex;
 `;
 
 export default class Task extends React.Component {

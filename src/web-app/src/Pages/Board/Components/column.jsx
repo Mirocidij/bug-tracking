@@ -6,26 +6,31 @@ import CardAdder from "./cardAdder";
 
 const Container = styled.div`
   box-sizing: border-box;
+  width: 300px;
 `;
 const ColumnContent = styled.div`
   background-color: #EBECF0;
   border-radius: 3px;
-
   width: auto;
-  margin-left: 8px;
-
+  //max-height: 800px;
+  margin: 0 8px;
+  
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 `;
 const Title = styled.h3`
   padding: 8px;
   position: sticky;
 `;
 const TaskList = styled.div`
+  box-sizing: border-box;
   padding: 8px;
   background-color: ${props => props.isDraggingOver ? 'skyblue' : 'inherit'};
   width: 250px;
-  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 800px;
 `;
 
 export default class Column extends React.Component {
