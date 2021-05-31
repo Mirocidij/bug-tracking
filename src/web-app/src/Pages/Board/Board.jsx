@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from './redux/actions';
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
-import Column from "./Components/column";
+import TaskListColumn from "./Components/TaskListColumn";
 
 const BoardWrapper = styled.div`
   position: absolute;
@@ -12,6 +12,9 @@ const BoardWrapper = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 const BoardMainContent = styled.div`
   height: 100%;
@@ -20,9 +23,15 @@ const BoardMainContent = styled.div`
   margin-right: 0;
   position: relative;
   transition: margin .1s ease-in;
+
+  overflow-y: hidden;
+  overflow-x: hidden;
 `;
 const BoardCanvas = styled.div`
   background: linear-gradient(180deg, rgba(0, 0, 0, .24) 0, rgba(0, 0, 0, .24) 48px, transparent 80px, transparent);
+
+  overflow-y: hidden;
+  overflow-x: hidden;
 `;
 const Container = styled.div`
   user-select: none;
@@ -41,10 +50,6 @@ const Container = styled.div`
 class Board extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    console.log(this.props)
   }
 
   render() {
@@ -82,7 +87,7 @@ class Board extends React.Component {
                     const tasksProps = columnProps.tasksIds.map((taskId) => tasks[taskId]);
 
                     return (
-                      <Column
+                      <TaskListColumn
                         key={columnProps.id}
                         column={columnProps}
                         tasks={tasksProps}
