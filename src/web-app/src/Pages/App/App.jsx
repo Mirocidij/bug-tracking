@@ -14,14 +14,16 @@ const App = () => {
     <div className="main-container">
       <Header/>
 
-      <Switch>
-        <Route exact path="/" component={Board}/>
-        <Route exact path="/users" component={Users}/>
-        <Route exact path="/companies" component={Companies}/>
-        <Route exact path="/boards" component={Boards}/>
-        <Route exact path="/profile" component={Profile}/>
-        <Route exact component={NoMatchPage}/>
-      </Switch>
+      <div className="content">
+        <Switch>
+          <Route exact path="/" component={Board}/>
+          <Route exact path="/users" component={Users}/>
+          <Route exact path="/companies" component={Companies}/>
+          <Route exact path="/boards" component={Boards}/>
+          <Route exact path="/profile" component={Profile}/>
+          <Route exact component={NoMatchPage}/>
+        </Switch>
+      </div>
     </div>
   );
 }

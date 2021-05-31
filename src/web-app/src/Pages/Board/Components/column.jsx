@@ -5,32 +5,45 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import CardAdder from "./cardAdder";
 
 const Container = styled.div`
+  width: 272px;
+  margin: 0 4px;
+  height: 100%;
   box-sizing: border-box;
-  width: 300px;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
 `;
 const ColumnContent = styled.div`
-  background-color: #EBECF0;
+  background-color: #ebecf0;
   border-radius: 3px;
-  width: auto;
-  //max-height: 800px;
-  margin: 0 8px;
-  
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  max-height: 100%;
+  position: relative;
+  white-space: normal;
 `;
 const Title = styled.h3`
-  padding: 8px;
-  position: sticky;
+  flex: 0 0 auto;
+  padding: 10px 8px;
+  position: relative;
+  min-height: 20px;
 `;
 const TaskList = styled.div`
-  box-sizing: border-box;
-  padding: 8px;
-  background-color: ${props => props.isDraggingOver ? 'skyblue' : 'inherit'};
-  width: 250px;
+  flex: 1 1 auto;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 800px;
+  margin: 0 4px;
+  padding: 0 4px;
+  min-height: 0;
+
+  //box-sizing: border-box;
+  //padding: 8px;
+  //
+  //width: 250px;
+  //overflow-y: auto;
+  //overflow-x: hidden;
+  //max-height: 800px;
 `;
 
 export default class Column extends React.Component {

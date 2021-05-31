@@ -8,10 +8,11 @@
     background-color: #c5f6f6;
 }
 
-.content-body {
-    height: 100vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
+.content {
+    flex-grow: 1;
+    position: relative;
+    overflow-y: auto;
+    outline: none;
 }
 
 .mt2 {

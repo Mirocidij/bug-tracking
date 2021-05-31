@@ -7,15 +7,35 @@ import styled from "styled-components";
 import Column from "./Components/column";
 
 const BoardWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+`;
+const BoardMainContent = styled.div`
   height: 100%;
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-right: 0;
+  position: relative;
+  transition: margin .1s ease-in;
+`;
+const BoardCanvas = styled.div`
+  background: linear-gradient(180deg, rgba(0, 0, 0, .24) 0, rgba(0, 0, 0, .24) 48px, transparent 80px, transparent);
 `;
 const Container = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  width: auto;
+  user-select: none;
+  white-space: nowrap;
+  //margin-bottom: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 `;
 
 class Board extends React.Component {
@@ -42,39 +62,42 @@ class Board extends React.Component {
     } = this.props;
 
     return (
-      <BoardWrapper>
-        <DragDropContext
-          onDragEnd={onDragEnd}
+      <DragDropContext
+        onDragEnd={onDragEnd}
+      >
+        <Droppable
+          droppableId="all-columns"
+          direction="horizontal"
+          type="column"
         >
-          <Droppable
-            droppableId="all-columns"
-            direction="horizontal"
-            type="column"
-          >
-            {(provided) => (
-              <Container
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {columnOrder.map((columnId, index) => {
-                  const columnProps = columns[columnId];
-                  const tasksProps = columnProps.tasksIds.map((taskId) => tasks[taskId]);
+          {(provided) => (
+            <BoardMainContent>
+              <BoardCanvas>
+                <Container
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {columnOrder.map((columnId, index) => {
+                    const columnProps = columns[columnId];
+                    const tasksProps = columnProps.tasksIds.map((taskId) => tasks[taskId]);
 
-                  return (
-                    <Column
-                      key={columnProps.id}
-                      column={columnProps}
-                      tasks={tasksProps}
-                      index={index}
-                    />
-                  )
-                })}
-                {provided.placeholder}
-              </Container>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </BoardWrapper>
+                    return (
+                      <Column
+                        key={columnProps.id}
+                        column={columnProps}
+                        tasks={tasksProps}
+                        index={index}
+                      />
+                    )
+                  })}
+                  {provided.placeholder}
+                </Container>
+              </BoardCanvas>
+            </BoardMainContent>
+          )}
+        </Droppable>
+      </DragDropContext>
+
     )
   }
 }
