@@ -10,8 +10,9 @@ import javax.persistence.*;
 @Table(name = "cards")
 public class Card extends BaseEntity<Long> {
 
+    private String content;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "card_lists_id")
     private CardList cardList;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

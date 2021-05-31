@@ -2,7 +2,7 @@ server:
   port: ${BUG_TRACKER_SERVER_PORT}
   servlet:
     session:
-      timeout: 1200
+      timeout: -1
 spring:
   datasource:
     url: ${DB_URL}

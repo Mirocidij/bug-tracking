@@ -28,4 +28,7 @@ public class Board extends BaseEntity<Long> {
     )
     private List<User> users;
 
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CardList> cardLists;
+
 }
