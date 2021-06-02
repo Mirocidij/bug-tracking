@@ -44,7 +44,7 @@ class Boards extends React.Component {
           margin: 4
         }} variant="primary"> Click me to load data! </Button>
         {
-          boards.map(board => (
+          boards && boards.map(board => (
             <BoardInfo key={board.id}>
               {`Board INFO: ${board.id} ${board.boardTitle} ${board.boardDescription}`}
 
@@ -54,11 +54,11 @@ class Boards extends React.Component {
 
               <hr/>
 
-              {board.users.map(user => (
-                <UserInfo key={user.id}>
-                  {`User INFO: ${user.id} ${user.username} ${user.firstName} ${user.lastName} ${user.email}`}
-                </UserInfo>
-              ))}
+              {/*{board.users.map(user => (*/}
+              {/*  <UserInfo key={user.id}>*/}
+              {/*    {`User INFO: ${user.id} ${user.username} ${user.firstName} ${user.lastName} ${user.email}`}*/}
+              {/*  </UserInfo>*/}
+              {/*))}*/}
             </BoardInfo>
           ))
         }

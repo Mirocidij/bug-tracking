@@ -5,16 +5,20 @@ import * as actions from './redux/actions';
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import TaskListColumn from "./Components/TaskListColumn";
+import { Button, Modal } from "react-bootstrap";
+import CardForm from "./Components/CardForm";
+import ColumnAdder from "./Components/ColumnAdder";
 
 const BoardWrapper = styled.div`
+  margin: 4px;
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
 
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 `;
 const BoardMainContent = styled.div`
   height: 100%;
@@ -23,22 +27,13 @@ const BoardMainContent = styled.div`
   margin-right: 0;
   position: relative;
   transition: margin .1s ease-in;
-
-  overflow-y: hidden;
-  overflow-x: hidden;
 `;
 const BoardCanvas = styled.div`
   background: linear-gradient(180deg, rgba(0, 0, 0, .24) 0, rgba(0, 0, 0, .24) 48px, transparent 80px, transparent);
-
-  overflow-y: hidden;
-  overflow-x: hidden;
 `;
 const Container = styled.div`
   user-select: none;
   white-space: nowrap;
-  //margin-bottom: 8px;
-  overflow-x: auto;
-  overflow-y: hidden;
   padding-bottom: 8px;
   position: absolute;
   top: 0;
@@ -50,6 +45,12 @@ const Container = styled.div`
 class Board extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      active: false,
+      currentTaskInModal: {},
+      currentListIdInModal: 'column-0'
+    }
   }
 
   render() {
@@ -58,50 +59,95 @@ class Board extends React.Component {
         boardDataIsLoading,
         tasks,
         columns,
-        columnOrder
+        columnOrder,
+        lastColumnId
       },
       actions: {
         loadBoardData,
-        onDragEnd
+        onDragEnd,
+        saveNewCard,
+        addNewColumn
       }
     } = this.props;
 
     return (
-      <DragDropContext
-        onDragEnd={onDragEnd}
-      >
-        <Droppable
-          droppableId="all-columns"
-          direction="horizontal"
-          type="column"
+      <BoardWrapper>
+        <DragDropContext
+          onDragEnd={onDragEnd}
         >
-          {(provided) => (
-            <BoardMainContent>
-              <BoardCanvas>
-                <Container
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {columnOrder.map((columnId, index) => {
-                    const columnProps = columns[columnId];
-                    const tasksProps = columnProps.tasksIds.map((taskId) => tasks[taskId]);
+          <Droppable
+            droppableId="all-columns"
+            direction="horizontal"
+            type="column"
+          >
+            {(provided) => (
+              <BoardMainContent>
+                <BoardCanvas>
+                  <Container
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {columnOrder.map((columnId, index) => {
+                      const columnProps = columns[columnId];
+                      const tasksProps = columnProps.tasksIds.map((taskId) => tasks[taskId]);
+                      return (
+                        <TaskListColumn
+                          key={columnProps.id}
+                          column={columnProps}
+                          tasks={tasksProps}
+                          index={index}
+                          addNewCard={(active, task) => {
+                            this.setState({
+                              ...this.state,
+                              active: active,
+                              currentTaskInModal: {
+                                ...task
+                              },
+                              currentListIdInModal: columnProps.id
+                            });
+                          }}
+                        />
+                      )
+                    })}
+                    {provided.placeholder}
+                    <ColumnAdder
+                      addNewColumn={addNewColumn}
+                    />
+                  </Container>
+                </BoardCanvas>
+              </BoardMainContent>
+            )}
+          </Droppable>
+        </DragDropContext>
+        <Modal
+          show={this.state.active}
+          onHide={() => console.log("On hide")}
+        >
+          <Modal.Header closeButton onHide={() => this.setState({ active: false })}>
+            <Modal.Title>
+              {
+                this.state.currentTaskInModal.id
+                  ? "Редактирование карточки"
+                  : "Создание карточки"
+              }
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <CardForm
+              handleSubmit={(newCardData) => {
+                saveNewCard(
+                  this.state.currentListIdInModal,
+                  newCardData
+                )
 
-                    return (
-                      <TaskListColumn
-                        key={columnProps.id}
-                        column={columnProps}
-                        tasks={tasksProps}
-                        index={index}
-                      />
-                    )
-                  })}
-                  {provided.placeholder}
-                </Container>
-              </BoardCanvas>
-            </BoardMainContent>
-          )}
-        </Droppable>
-      </DragDropContext>
+                this.setState({ active: false })
+              }}
+              cardProps={this.state.currentTaskInModal}
+              handleClose={() => this.setState({ active: false })}
+            />
+          </Modal.Body>
+        </Modal>
+      </BoardWrapper>
 
     )
   }

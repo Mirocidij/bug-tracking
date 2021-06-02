@@ -11,22 +11,19 @@ import styled from "styled-components";
 
 const MainContainer = styled.div`
   height: 100vh;
-  overflow-y: hidden;
-  overflow-x: hidden;
-
+  width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #c5f6f6;
-  
-  background-image: url("https://img1.goodfon.ru/original/2880x1800/7/e7/vesna-gory-alpy-dolina-doma.jpg");
+  background-color: #a171de;
+
+  background-image: url("https://wallbox.ru/wallpapers/main2/201718/kamni-more.jpg");
   background-size: 100% 100%;
 `;
 
 const ContentContainer = styled.div`
+  padding-top: 8px;
   flex-grow: 1;
   position: relative;
-  overflow-y: hidden;
-  overflow-x: hidden;
   outline: none;
 `;
 
@@ -35,7 +32,7 @@ const App = () => {
     <MainContainer className="main-container">
       <Header/>
 
-      <ContentContainer className="content">
+      <ContentContainer>
         <Switch>
           <Route exact path="/" component={Board}/>
           <Route exact path="/users" component={Users}/>

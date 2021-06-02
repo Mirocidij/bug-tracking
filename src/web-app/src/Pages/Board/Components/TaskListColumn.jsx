@@ -3,18 +3,16 @@ import styled from "styled-components";
 import Task from './Task'
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import CardAdder from "./CardAdder";
+import { Form } from "react-bootstrap";
 
 const Container = styled.div`
-  //min-width: 300px;
+  width: 272px;
   margin: 0 4px;
   height: 100%;
   box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
   white-space: nowrap;
-
-  overflow-y: hidden;
-  overflow-x: hidden;
 `;
 const ColumnContent = styled.div`
   background-color: #ebecf0;
@@ -25,9 +23,6 @@ const ColumnContent = styled.div`
   max-height: 100%;
   position: relative;
   white-space: normal;
-  
-  overflow-y: hidden;
-  overflow-x: hidden;
 `;
 const Title = styled.h3`
   flex: 0 0 auto;
@@ -40,22 +35,33 @@ const TaskList = styled.div`
   margin: 0 4px;
   padding: 0 4px;
   min-height: 20px;
-  width: 272px;
   box-sizing: content-box;
 `;
 
 export default class TaskListColumn extends React.Component {
   render() {
+    function getStyle(style, snapshot) {
+      if (!snapshot.isDropAnimating) {
+        return style;
+      }
+      return {
+        ...style,
+        // cannot be 0, but make it super tiny
+        transitionDuration: `0.001s`,
+      };
+    }
+
     return (
       <Draggable
         draggableId={this.props.column.id}
         index={this.props.index}
       >
         {
-          (provided) => (
+          (provided, snapshot) => (
             <Container
               ref={provided.innerRef}
               {...provided.draggableProps}
+              style={getStyle(provided.draggableProps.style, snapshot)}
             >
               <ColumnContent>
                 <Title {...provided.dragHandleProps}>
@@ -71,11 +77,16 @@ export default class TaskListColumn extends React.Component {
                       {...provided.droppableProps}
                       isDraggingOver={snapshot.isDraggingOver}
                     >
-                      {this.props.tasks.map((task, index) =>
-                        <Task
-                          key={task.id}
-                          task={task}
-                          index={index}/>)}
+                      {
+                        this.props.tasks.map((task, index) => {
+                          return (
+                            <Task
+                              openModal={() => this.props.addNewCard(true, task)}
+                              key={task.id}
+                              task={task}
+                              index={index}/>
+                          )
+                        })}
                       {provided.placeholder}
                     </TaskList>
                   )}
@@ -84,8 +95,10 @@ export default class TaskListColumn extends React.Component {
                   padding: 8
                 }}>
                   <CardAdder
-                    addNewCard={() => {
+                    addNewCard={(newCard) => {
                       console.log(this.props.column)
+
+                      this.props.addNewCard(true, newCard);
                     }}
                   />
                 </div>

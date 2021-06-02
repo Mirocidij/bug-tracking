@@ -3,7 +3,8 @@ import thunk from "redux-thunk";
 import rootReducer from './rootReducer'
 import { loadState, saveState } from "./loadState";
 
-let persistedReduxStore = loadState();
+// let persistedReduxStore = loadState();
+let persistedReduxStore = undefined;
 
 const store = createStore(
   rootReducer,
@@ -14,6 +15,8 @@ const store = createStore(
 
 store.subscribe(() => {
   saveState(store.getState())
+
+  console.log(store.getState())
 })
 
 export default store;

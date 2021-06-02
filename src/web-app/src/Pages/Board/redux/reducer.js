@@ -20,8 +20,6 @@ export function loadBoardData(boardId = 0) {
     await dispatch(boardDataLoadingStartEvent());
 
     {
-      console.log("Test")
-
       await dispatch(boardDataLoadEvent({ boardId }))
     }
 
@@ -33,7 +31,7 @@ const ON_DRAG_END = 'ON_DRAG_END';
 const onDragEndEvent = (newBoardState) => ({
   type: ON_DRAG_END,
   newBoardState: newBoardState
-})
+});
 
 export function onDragEnd(result) {
   const { destination, source, draggableId, type } = result;
@@ -116,6 +114,37 @@ export function onDragEnd(result) {
   }
 }
 
+const ON_SAVE_NEW_CARD = 'ON_SAVE_NEW_CARD';
+const onSaveNewCardEvent = (columnId, newCard) => ({
+  type: ON_SAVE_NEW_CARD,
+  newCard: newCard,
+  columnId: columnId
+});
+
+export function saveNewCard(columnId, newCard) {
+  return async (dispatch) => {
+    await dispatch(onSaveNewCardEvent(columnId, newCard));
+  }
+}
+
+const ON_ADD_NEW_COLUMN = 'ON_ADD_NEW_COLUMN';
+const onAddNewColumnEvent = (newColumn) => ({
+  type: ON_ADD_NEW_COLUMN,
+  newColumn: newColumn
+})
+
+export function addNewColumn(newColumn) {
+  return async (dispatch, getState) => {
+    const { lastColumnId } = getState().board;
+
+    await dispatch(onAddNewColumnEvent({
+      id: lastColumnId + 1,
+      title: 'Test column',
+      tasksIds: []
+    }))
+  }
+}
+
 export function reducer(state = initialState, action) {
   switch (action.type) {
     case BOARD_DATA_LOADING_START: {
@@ -135,6 +164,43 @@ export function reducer(state = initialState, action) {
         ...state,
         boardDataIsLoading: false
       }
+    }
+    case ON_SAVE_NEW_CARD: {
+      const card = action.newCard;
+      const cardId = card.id;
+      const newCardId = card.id ? card.id : '' + (++state.lastTaskId);
+      card.id = newCardId;
+      state.tasks[newCardId] = card;
+
+      if (card.id !== cardId) {
+        state.columns[action.columnId].tasksIds.push(newCardId);
+      }
+
+      return state;
+    }
+    case ON_ADD_NEW_COLUMN: {
+      const column = action.newColumn;
+
+      const newLastColumnId = column.id;
+      const newColumnOrder = Array.from(state.columnOrder);
+      const newId = 'column-' + newLastColumnId;
+      column.id = newId;
+      const newColumns = {
+        ...state.columns,
+        [newId]: column
+      }
+      newColumnOrder.push(newId)
+
+      const newState = {
+        ...state,
+        lastColumnId: newLastColumnId,
+        columns: newColumns,
+        columnOrder: newColumnOrder
+      }
+
+      console.log(newState)
+
+      return newState;
     }
     case ON_DRAG_END: {
       return {

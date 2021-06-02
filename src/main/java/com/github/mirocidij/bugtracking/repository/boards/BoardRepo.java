@@ -14,4 +14,6 @@ public interface BoardRepo extends JpaRepository<Board, Long> {
     @Query("select b from Board b join fetch b.user where b.id = :id")
     Optional<Board> findWithJoinFetch(Long id);
 
+    List<Board> findAllByUserUsername(String username);
+
 }
