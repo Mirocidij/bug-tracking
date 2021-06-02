@@ -4,19 +4,19 @@ const initialState = {
   tasks: {
     '1': {
       id: '1',
-      title: 'Take out the garbage',
+      title: 'Ошибка валидации',
       description: '',
       urgency: ''
     },
     '2': {
       id: '2',
-      title: 'Watch my favorite show',
+      title: 'Ошибка при регистрации',
       description: '',
       urgency: ''
     },
     '3': {
       id: '3',
-      title: 'Charge my phone',
+      title: 'Неточное поведение при создании нового списка',
       description: '',
       urgency: ''
     }
