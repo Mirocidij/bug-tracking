@@ -16,6 +16,10 @@ public class Board extends BaseEntity<Long> {
 
     private String boardDescription;
 
+    private Integer backgroundColor;
+
+    private String backgroundImageUrl;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;

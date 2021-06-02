@@ -1,6 +1,8 @@
 package com.github.mirocidij.bugtracking.controller;
 
-import com.github.mirocidij.bugtracking.domain.dto.boards.BoardDto;
+import com.github.mirocidij.bugtracking.domain.dto.UserDto;
+import com.github.mirocidij.bugtracking.domain.dto.boards.BoardResponseDto;
+import com.github.mirocidij.bugtracking.domain.model.boards.Board;
 import com.github.mirocidij.bugtracking.repository.boards.BoardRepo;
 import com.github.mirocidij.bugtracking.security.jwt.JwtUser;
 import lombok.RequiredArgsConstructor;
@@ -25,15 +27,21 @@ public class BoardController {
     private final BoardRepo boardRepo;
 
     @GetMapping("/all")
-    public ResponseEntity<List<BoardDto>> getAllBoards(@AuthenticationPrincipal JwtUser user) {
-        var boards = boardRepo.findAllByUserUsername(user.getUsername());
+    public ResponseEntity<List<BoardResponseDto>> getAllBoards(@AuthenticationPrincipal JwtUser user) {
+        var boards = boardRepo.findAllByUserUsernameOrderById(user.getUsername());
 
         if (boards.size() == 0) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
         var ret = boards.stream()
-                        .map(board -> modelMapper.map(board, BoardDto.class))
+                        .map(board -> {
+                            var boardResponseDto = modelMapper.map(board, BoardResponseDto.class);
+                            var userDto = modelMapper.map(board.getUser(), UserDto.class);
+                            boardResponseDto.setUserDto(userDto);
+
+                            return boardResponseDto;
+                        })
                         .collect(Collectors.toList());
 
         return new ResponseEntity<>(ret, HttpStatus.OK);

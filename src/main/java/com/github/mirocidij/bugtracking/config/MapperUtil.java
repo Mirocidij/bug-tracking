@@ -1,5 +1,9 @@
 package com.github.mirocidij.bugtracking.config;
 
+import com.github.mirocidij.bugtracking.domain.dto.UserDto;
+import com.github.mirocidij.bugtracking.domain.dto.boards.BoardResponseDto;
+import com.github.mirocidij.bugtracking.domain.model.boards.Board;
+import com.github.mirocidij.bugtracking.domain.model.user.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +23,11 @@ public class MapperUtil {
 
     @Bean
     public ModelMapper modelMapper() {
-        return new ModelMapper();
+        var modelMapper = new ModelMapper();
+
+        modelMapper.createTypeMap(User.class, UserDto.class);
+
+        return modelMapper;
     }
 
 }
