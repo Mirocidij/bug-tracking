@@ -1,7 +1,6 @@
 import initialState from "./initialState";
-import BoardInteractor from "../../DataCore/Interactor/BoardInteractor";
-
-const ON_LOAD_BOARDS = 'ON_LOAD_BOARDS';
+import BoardInteractor from "../../../DataCore/Interactor/BoardInteractor";
+import { ON_LOAD_BOARDS } from './actionTypes'
 
 const onLoadAllBoardsEvent = (boards) => ({
   type: ON_LOAD_BOARDS,
@@ -11,6 +10,8 @@ const onLoadAllBoardsEvent = (boards) => ({
 export function getAllBoards() {
   return async (dispatch) => {
     let boards = await BoardInteractor.getAll();
+
+    console.log(boards)
 
     await dispatch(onLoadAllBoardsEvent(boards))
   }

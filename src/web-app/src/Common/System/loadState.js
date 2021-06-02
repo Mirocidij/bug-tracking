@@ -21,8 +21,6 @@ export const saveState = (state) => {
 
     const serializedState = JSON.stringify(stateToSave);
     localStorage.setItem('persistedReduxStore', serializedState);
-
-    console.log("Data is saved")
   } catch (err) {
     // Ignore writes errors
   }

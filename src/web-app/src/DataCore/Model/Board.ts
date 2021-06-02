@@ -5,7 +5,9 @@ export class Board {
         private id: number,
         private boardTitle: string,
         private boardDescription: string,
-        private user: User,
+        private backgroundColor: number,
+        private backgroundImageUrl: string,
+        private boardOwner: User,
         private users: Array<User>
     ) {
     }

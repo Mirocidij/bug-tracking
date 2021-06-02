@@ -3,20 +3,25 @@ import Header from "./Components/Header/Header";
 import { Route, Switch } from "react-router-dom";
 import Users from "../Users/Users";
 import Companies from "../Companies/Companies";
-import Boards from "../Boards/Boards";
+import Boards from "../UserBoards/UserBoards";
 import Profile from "../Profile/Profile";
 import { NoMatchPage } from "../NoMatch/NoMatchPage";
 import Board from "../Board/Board";
 import styled from "styled-components";
+import { connect } from 'react-redux'
+import { bindActionCreators } from "redux";
 
 const MainContainer = styled.div`
   height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #a171de;
+  background-color: #FAFBFC;
 
-  background-image: url("https://wallbox.ru/wallpapers/main2/201718/kamni-more.jpg");
+  ${props => props.backgroundIsPicture
+          ? `background-image: url(${props.backgroundUrl});`
+          : 'background-image: none'}
+
   background-size: 100% 100%;
 `;
 
@@ -27,10 +32,14 @@ const ContentContainer = styled.div`
   outline: none;
 `;
 
-const App = () => {
+const App = ({ backgroundIsPicture, backgroundUrl }) => {
   return (
-    <MainContainer className="main-container">
-      <Header/>
+    <MainContainer
+      backgroundIsPicture={backgroundIsPicture}
+      backgroundUrl={backgroundUrl}
+      className="main-container"
+    >
+      <Header backgroundIsPicture={backgroundIsPicture}/>
 
       <ContentContainer>
         <Switch>
@@ -46,4 +55,12 @@ const App = () => {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  ...state.app
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators({}, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

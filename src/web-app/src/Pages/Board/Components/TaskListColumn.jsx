@@ -15,7 +15,7 @@ const Container = styled.div`
   white-space: nowrap;
 `;
 const ColumnContent = styled.div`
-  background-color: #ebecf0;
+  background-color: #ebecf0;;
   border-radius: 3px;
   box-sizing: border-box;
   display: flex;
@@ -96,8 +96,6 @@ export default class TaskListColumn extends React.Component {
                 }}>
                   <CardAdder
                     addNewCard={(newCard) => {
-                      console.log(this.props.column)
-
                       this.props.addNewCard(true, newCard);
                     }}
                   />

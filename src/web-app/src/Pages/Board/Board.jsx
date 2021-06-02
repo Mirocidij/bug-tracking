@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from './redux/actions';
+import * as actions from './Redux/actions';
+import { changeBackgroundState } from '../App/Redux/actions'
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import TaskListColumn from "./Components/TaskListColumn";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import CardForm from "./Components/CardForm";
 import ColumnAdder from "./Components/ColumnAdder";
 
@@ -51,6 +52,14 @@ class Board extends React.Component {
       currentTaskInModal: {},
       currentListIdInModal: 'column-0'
     }
+  }
+
+  componentDidMount() {
+    this.props.actions.changeBackgroundState()
+  }
+
+  componentWillUnmount() {
+    this.props.actions.changeBackgroundState()
   }
 
   render() {
@@ -121,7 +130,6 @@ class Board extends React.Component {
         </DragDropContext>
         <Modal
           show={this.state.active}
-          onHide={() => console.log("On hide")}
         >
           <Modal.Header closeButton onHide={() => this.setState({ active: false })}>
             <Modal.Title>
@@ -158,7 +166,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({ ...actions }, dispatch)
+  actions: bindActionCreators({ ...actions, changeBackgroundState }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);

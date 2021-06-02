@@ -5,14 +5,14 @@ import React from "react";
 import styled from "styled-components";
 
 const HeaderContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${props => props.backgroundIsPicture ? 'rgba(0, 0, 0, 0.5)' : '#006DA5'};
   font-weight: bold;
   color: white;
 `;
 
-const Header = () => {
+const Header = ({ backgroundIsPicture }) => {
   return (
-    <HeaderContainer>
+    <HeaderContainer backgroundIsPicture={backgroundIsPicture}>
       <Navbar variant="dark" bg="link" collapseOnSelect={true} sticky="top" expand="lg">
         <Container>
           <Navbar.Brand className="header-brand" as={NavLink} to="/">

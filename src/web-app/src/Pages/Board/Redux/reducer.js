@@ -1,8 +1,9 @@
 import initialState from "./initialState";
-
-const BOARD_DATA_LOADING_START = 'BOARD_DATA_LOADING_START';
-const BOARD_DATA_LOAD = 'BOARD_DATA_LOAD';
-const BOARD_DATA_LOADING_END = 'BOARD_DATA_LOADING_END';
+import {
+  BOARD_DATA_LOAD,
+  BOARD_DATA_LOADING_END,
+  BOARD_DATA_LOADING_START, ON_ADD_NEW_COLUMN, ON_DRAG_END, ON_SAVE_NEW_CARD
+} from "./actionTypes";
 
 const boardDataLoadingStartEvent = () => ({
   type: BOARD_DATA_LOADING_START
@@ -27,7 +28,6 @@ export function loadBoardData(boardId = 0) {
   }
 }
 
-const ON_DRAG_END = 'ON_DRAG_END';
 const onDragEndEvent = (newBoardState) => ({
   type: ON_DRAG_END,
   newBoardState: newBoardState
@@ -114,7 +114,6 @@ export function onDragEnd(result) {
   }
 }
 
-const ON_SAVE_NEW_CARD = 'ON_SAVE_NEW_CARD';
 const onSaveNewCardEvent = (columnId, newCard) => ({
   type: ON_SAVE_NEW_CARD,
   newCard: newCard,
@@ -127,7 +126,6 @@ export function saveNewCard(columnId, newCard) {
   }
 }
 
-const ON_ADD_NEW_COLUMN = 'ON_ADD_NEW_COLUMN';
 const onAddNewColumnEvent = (newColumn) => ({
   type: ON_ADD_NEW_COLUMN,
   newColumn: newColumn
@@ -197,8 +195,6 @@ export function reducer(state = initialState, action) {
         columns: newColumns,
         columnOrder: newColumnOrder
       }
-
-      console.log(newState)
 
       return newState;
     }

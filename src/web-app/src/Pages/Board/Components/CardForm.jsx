@@ -61,9 +61,10 @@ const CardForm = ({ cardProps, handleClose, handleSubmit }) => {
           onChange={e => setUrgency(e.target.value)}
           as="select"
         >
+          <option> </option>
           <option>Бессрочная</option>
           <option>Желательно выполнить</option>
-          <option>Нужно выполнить как можно скорее</option>
+          <option>Нужно выполнить</option>
           <option>Срочная</option>
         </Form.Control>
       </Form.Group>
