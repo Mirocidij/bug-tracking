@@ -1,5 +1,5 @@
 server:
-  port: ${BUG_TRACKER_SERVER_PORT}
+  port: ${BUG_TRACKER_SERVER_PORT:9000}
   servlet:
     session:
       timeout: -1
@@ -7,8 +7,8 @@ spring:
   datasource:
     url: ${DB_URL}
     driver-class-name: org.postgresql.Driver
-    password: ${DB_PASSWORD}
-    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD:postgres}
+    username: ${DB_USERNAME:postgres}
   jpa:
     open-in-view: true
     hibernate:
@@ -19,7 +19,7 @@ spring:
 config:
   jwt:
     token:
-      secret: ${TOKEN_SECRET}
-      expired: ${TOKEN_EXPIRATION_TIME}
+      secret: ${TOKEN_SECRET:secret}
+      expired: ${TOKEN_EXPIRATION_TIME:1000000}
 
 
